@@ -1,13 +1,29 @@
 {
-    "name": "vdbelt/omnipay-acapture",
+    "name": "vdbelt/omnipay-oppwa",
     "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "omnipay/common": "~2.0"
     },
     "require-dev": {
         "omnipay/tests": "~2.0"
     },
+    "autoload": {
+        "psr-4": { "Omnipay\\Oppwa\\" : "src/" }
+    },
+    "scripts": {
+      "test": "phpunit"
+    },
     "license": "MIT",
+    "homepage": "https://github.com/vdbelt/omnipay-oppwa",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "payon",
+        "oppwa",
+        "omnipay"
+    ],
     "authors": [
         {
             "name": "Martin van de Belt",

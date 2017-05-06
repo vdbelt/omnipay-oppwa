@@ -1,0 +1,15 @@
+HTTP/1.1 403 Forbidden
+Date: Sat, 06 May 2017 09:03:57 GMT
+Server: Apache-Coyote/1.1
+Strict-Transport-Security: max-age=63072000; includeSubdomains; preload
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: private, no-cache, no-store
+Pragma: no-cache
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+X-Application-WAF-Action: allow
+Content-Type: application/json;charset=UTF-8
+Content-Length: 406
+
+{"id":"8a82944a5bd8e738015bdd00507d6e08","paymentType":"DB","paymentBrand":"SOFORTUEBERWEISUNG","result":{"code":"800.900.300","description":"invalid authentication information"},"bankAccount":{"country":"AT"},"buildNumber":"12f84ff3b13acc20971256c12de7ebf3dca5b5a8@2017-05-04 12:59:36 +0000","timestamp":"2017-05-06 09:03:57+0000","ndc":"8a829417572279ad015732d66cb427b6_f0fae40f2e7f4bcdb64b5609d7ed6eb0"}
