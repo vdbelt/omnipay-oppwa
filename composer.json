@@ -1,0 +1,17 @@
+{
+    "name": "vdbelt/omnipay-acapture",
+    "type": "library",
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin van de Belt",
+            "email": "martin@vandebelt.dk"
+        }
+    ]
+}
