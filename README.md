@@ -33,6 +33,13 @@ The following gateways are provided by this package:
 
 * Oppwa
 
+Available configuration options:
+
+* userId (string, required)
+* password (string, required)
+* entityId (string, required)
+* testMode (0/1, optional)
+
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.
 
