@@ -55,6 +55,11 @@ class Gateway extends AbstractGateway
         return $this->createRequest('\Omnipay\Oppwa\Message\AuthorizeRequest', $options);
     }
 
+    public function completeAuthorize(array $options = array())
+    {
+        return $this->createRequest('\Omnipay\Oppwa\Message\FetchTransactionRequest', $options);
+    }
+
     public function capture(array $options = array())
     {
         return $this->createRequest('\Omnipay\Oppwa\Message\CaptureRequest', $options);
@@ -63,6 +68,11 @@ class Gateway extends AbstractGateway
     public function purchase(array $options = array())
     {
         return $this->createRequest('\Omnipay\Oppwa\Message\PurchaseRequest', $options);
+    }
+
+    public function completePurchase(array $options = array())
+    {
+        return $this->createRequest('\Omnipay\Oppwa\Message\FetchTransactionRequest', $options);
     }
 
     public function refund(array $options = array())

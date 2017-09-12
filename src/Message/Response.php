@@ -4,8 +4,9 @@ namespace Omnipay\Oppwa\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Common\Message\RedirectResponseInterface;
 
-class Response extends AbstractResponse
+class Response extends AbstractResponse implements RedirectResponseInterface
 {
     protected $statusCode;
 
@@ -17,7 +18,10 @@ class Response extends AbstractResponse
 
     public function isSuccessful()
     {
-        return ! $this->isRedirect() && ! $this->isPending() && $this->getCode() < 400;
+        list( $first, $second, ) = explode('.', (string) $this->data['result']['code']);
+
+        return ! $this->isRedirect() && ! $this->isPending()
+            && $this->getCode() < 400 && $first == '000' && $second < '200';
     }
 
     public function isRedirect()
@@ -49,6 +53,22 @@ class Response extends AbstractResponse
         if ($this->isRedirect()) {
             return $this->data['redirect']['url'];
         }
+    }
+
+    public function getRedirectMethod()
+    {
+        return 'POST';
+    }
+
+    public function getRedirectData()
+    {
+        $list = array();
+
+        foreach ($this->data['redirect']['parameters'] as $pair) {
+            $list[$pair['name']] = $pair['value'];
+        }
+
+        return  $list;
     }
 
     public function getMessage()
