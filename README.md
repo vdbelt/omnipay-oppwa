@@ -17,7 +17,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "vdbelt/omnipay-oppwa": "~1.0"
+        "vdbelt/omnipay-oppwa": "~1.1"
     }
 }
 ```
