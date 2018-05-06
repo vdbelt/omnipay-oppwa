@@ -4,10 +4,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "omnipay/common": "~2.0"
+        "omnipay/common": "^3@beta"
     },
     "require-dev": {
-        "omnipay/tests": "~2.0"
+        "omnipay/tests": "^3"
     },
     "autoload": {
         "psr-4": { "Omnipay\\Oppwa\\" : "src/" }

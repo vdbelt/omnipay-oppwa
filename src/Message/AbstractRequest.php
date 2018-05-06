@@ -53,15 +53,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function sendData($data)
     {
-        $this->httpClient->getEventDispatcher()->addListener(
-            'request.error',
-            function ($event) {
-                if ($event['response']->isClientError()) {
-                    $event->stopPropagation();
-                }
-            }
-        );
-
         $authentication = array(
             'authentication.userId' => $this->getUserId(),
             'authentication.password' => $this->getPassword(),
@@ -70,35 +61,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
         $http_query = $this->getHttpMethod() == 'GET' ? '?' . http_build_query($authentication) : '';
 
-        $httpRequest = $this->httpClient->createRequest(
+        $httpResponse = $this->httpClient->request(
             $this->getHttpMethod(),
             $this->getEndpoint() . $http_query,
-            null,
-            array_merge(
+            array(),
+            http_build_query(array_merge(
                 $authentication,
                 $data
-            )
+            ))
         );
 
-        try {
-            $httpRequest->getCurlOptions()->set(CURLOPT_SSLVERSION, 6);
-            $httpResponse = $httpRequest->send();
-
-            $body = $httpResponse->getBody(true);
-
-            $jsonToArrayResponse = !empty($body) ? $httpResponse->json() : array();
-
-            return $this->response = $this->createResponse($jsonToArrayResponse, $httpResponse->getStatusCode());
-        } catch (\Exception $e) {
-            throw new \Exception(
-                'Error communicating with payment gateway: ' . $e->getMessage(),
-                $e->getCode()
-            );
-        }
-    }
-
-    protected function createResponse($data, $statusCode)
-    {
-        return $this->response = new Response($this, $data, $statusCode);
+        return $this->response = new Response($this, json_decode($httpResponse->getBody(), true), $httpResponse->getStatusCode());
     }
 }
