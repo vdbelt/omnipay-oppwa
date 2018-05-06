@@ -71,6 +71,10 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             ))
         );
 
-        return $this->response = new Response($this, json_decode($httpResponse->getBody(), true), $httpResponse->getStatusCode());
+        return $this->response = new Response(
+            $this,
+            json_decode($httpResponse->getBody(), true),
+            $httpResponse->getStatusCode()
+        );
     }
 }
