@@ -1,10 +1,9 @@
 {
     "name": "vdbelt/omnipay-oppwa",
     "type": "library",
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "omnipay/common": "^3@beta"
+        "omnipay/common": "^3"
     },
     "require-dev": {
         "omnipay/tests": "^3",
