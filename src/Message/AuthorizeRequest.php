@@ -14,6 +14,86 @@ class AuthorizeRequest extends AbstractRequest
         return $this->setParameter('bankAccount', $data);
     }
 
+    public function getCustomerGivenName()
+    {
+        return $this->getParameter('customerGivenName');
+    }
+
+    public function setCustomerGivenName($value)
+    {
+        return $this->setParameter('customerGivenName', $value);
+    }
+
+    public function getCustomerSurname()
+    {
+        return $this->getParameter('customerSurname');
+    }
+
+    public function setCustomerSurname($value)
+    {
+        return $this->setParameter('customerSurname', $value);
+    }
+
+    public function getCustomerEmail()
+    {
+        return $this->getParameter('customerEmail');
+    }
+
+    public function setCustomerEmail($value)
+    {
+        return $this->setParameter('customerEmail', $value);
+    }
+
+    public function getBillingCity()
+    {
+        return $this->getParameter('billingCity');
+    }
+
+    public function setBillingCity($value)
+    {
+        return $this->setParameter('billingCity', $value);
+    }
+
+    public function getBillingCountry()
+    {
+        return $this->getParameter('billingCountry');
+    }
+
+    public function setBillingCountry($value)
+    {
+        return $this->setParameter('billingCountry', $value);
+    }
+
+    public function getBillingState()
+    {
+        return $this->getParameter('billingState');
+    }
+
+    public function setBillingState($value)
+    {
+        return $this->setParameter('billingState', $value);
+    }
+
+    public function getBillingStreet()
+    {
+        return $this->getParameter('billingStreet');
+    }
+
+    public function setBillingStreet($value)
+    {
+        return $this->setParameter('billingStreet', $value);
+    }
+
+    public function getBillingPostCode()
+    {
+        return $this->getParameter('billingPostCode');
+    }
+
+    public function setBillingPostCode($value)
+    {
+        return $this->setParameter('billingPostCode', $value);
+    }
+
     public function getData()
     {
         $this->validate('amount', 'currency');
@@ -28,6 +108,19 @@ class AuthorizeRequest extends AbstractRequest
             'notificationUrl' => $this->getNotifyUrl(),
             'customer.ip' => $this->getClientIp()
         );
+
+        $extra = array(
+            'customer.givenName' => $this->getCustomerGivenName(),
+            'customer.surname'  => $this->getCustomerSurname(),
+            'customer.email'   => $this->getCustomerEmail(),
+            'billing.country'   => $this->getBillingCountry(),
+            'billing.city'  => $this->getBillingCity(),
+            'billing.state' => $this->getBillingState(),
+            'billing.postcode' => $this->getBillingPostCode(),
+            'billing.street1' => $this->getBillingStreet()
+        );
+
+        $data = array_merge($data, array_filter($extra));
 
         if ($this->getBankAccount()) {
             foreach ($this->getBankAccount() as $key => $value) {
