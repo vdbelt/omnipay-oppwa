@@ -26,8 +26,7 @@ The following gateways are provided by this package:
 
 Available configuration options:
 
-* userId (string, required)
-* password (string, required)
+* token (string, required)
 * entityId (string, required)
 * testMode (0/1, optional)
 

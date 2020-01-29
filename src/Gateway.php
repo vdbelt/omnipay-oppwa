@@ -14,30 +14,19 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return array(
-            'userId' => '',
-            'password' => '',
+            'token' => '',
             'entityId' => ''
         );
     }
 
-    public function getUserId()
+    public function getToken()
     {
-        return $this->getParameter('userId');
+        return $this->getParameter('token');
     }
 
-    public function setUserId($value)
+    public function setToken($value)
     {
-        return $this->setParameter('userId', $value);
-    }
-
-    public function getPassword()
-    {
-        return $this->getParameter('password');
-    }
-
-    public function setPassword($value)
-    {
-        return $this->setParameter('password', $value);
+        return $this->setParameter('token', $value);
     }
 
     public function getEntityId()
