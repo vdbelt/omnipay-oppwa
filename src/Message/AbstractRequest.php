@@ -10,24 +10,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     protected $liveEndpoint = 'https://oppwa.com';
 
-    public function getUserId()
+    public function getToken()
     {
-        return $this->getParameter('userId');
+        return $this->getParameter('token');
     }
 
-    public function setUserId($value)
+    public function setToken($value)
     {
-        return $this->setParameter('userId', $value);
-    }
-
-    public function getPassword()
-    {
-        return $this->getParameter('password');
-    }
-
-    public function setPassword($value)
-    {
-        return $this->setParameter('password', $value);
+        return $this->setParameter('token', $value);
     }
 
     public function getEntityId()
@@ -53,22 +43,21 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function sendData($data)
     {
-        $authentication = array(
-            'authentication.userId' => $this->getUserId(),
-            'authentication.password' => $this->getPassword(),
-            'authentication.entityId' => $this->getEntityId()
+        $queryParams = array(
+            'entityId' => $this->getEntityId()
         );
 
-        $http_query = $this->getHttpMethod() == 'GET' ? '?' . http_build_query($authentication) : '';
+        $http_query = $this->getHttpMethod() == 'GET' ? '?' . http_build_query($queryParams) : '';
 
         $httpResponse = $this->httpClient->request(
             $this->getHttpMethod(),
             $this->getEndpoint() . $http_query,
             array(
-                'Content-Type' => 'application/x-www-form-urlencoded'
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Authorization' =>  'Bearer '.$this->getToken()
             ),
             http_build_query(array_merge(
-                $authentication,
+                $queryParams,
                 $data
             ))
         );
