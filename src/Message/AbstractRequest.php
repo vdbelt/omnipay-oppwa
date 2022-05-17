@@ -53,11 +53,12 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function sendData($data)
     {
-        $queryParams = array(
+        $params = array(
             'entityId' => $this->getEntityId()
         );
 
-        $http_query = $this->getHttpMethod() == 'GET' ? '?' . http_build_query($queryParams) : '';
+        $http_query = $this->getHttpMethod() === 'GET' ? '?' . http_build_query($params) : '';
+        $body = $this->getHttpMethod() === 'POST' ? array_merge($params, $data) : null;
 
         $httpResponse = $this->httpClient->request(
             $this->getHttpMethod(),
@@ -66,10 +67,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Authorization' =>  'Bearer '.$this->getToken()
             ),
-            http_build_query(array_merge(
-                $queryParams,
-                $data
-            ))
+            $body ? http_build_query($body) : null
         );
 
         return $this->response = new Response(

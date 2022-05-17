@@ -18,10 +18,14 @@ class Response extends AbstractResponse implements RedirectResponseInterface
 
     public function isSuccessful()
     {
+        if ($this->getCode() >= 400) {
+            return false;
+        }
+
         list( $first, $second, ) = explode('.', (string) $this->data['result']['code']);
 
         return ! $this->isRedirect() && ! $this->isPending()
-            && $this->getCode() < 400 && $first == '000' && $second < '200';
+            && $first == '000' && $second < '200';
     }
 
     public function isRedirect()
