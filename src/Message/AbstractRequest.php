@@ -10,6 +10,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     protected $liveEndpoint = 'https://oppwa.com';
 
+    public function getIntegrationType()
+    {
+        return $this->getParameter('integrationType');
+    }
+
+    public function setIntegrationType($value)
+    {
+        return $this->setParameter('integrationType', $value);
+    }
+
     public function getToken()
     {
         return $this->getParameter('token');

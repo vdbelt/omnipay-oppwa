@@ -6,6 +6,9 @@ use Omnipay\Common\AbstractGateway;
 
 class Gateway extends AbstractGateway
 {
+    const TYPE_SERVER_TO_SERVER = 'server-to-server';
+    const TYPE_COPY_AND_PASTE = 'copy-and-paste';
+
     public function getName()
     {
         return 'Oppwa';
@@ -15,8 +18,19 @@ class Gateway extends AbstractGateway
     {
         return array(
             'token' => '',
-            'entityId' => ''
+            'entityId' => '',
+            'integrationType' => self::TYPE_SERVER_TO_SERVER
         );
+    }
+
+    public function getIntegrationType()
+    {
+        return $this->getParameter('integrationType');
+    }
+
+    public function setIntegrationType($value)
+    {
+        return $this->setParameter('integrationType', $value);
     }
 
     public function getToken()

@@ -2,6 +2,8 @@
 
 namespace Omnipay\Oppwa\Message;
 
+use Omnipay\Oppwa\Gateway;
+
 class AuthorizeRequest extends AbstractRequest
 {
     public function getBankAccount()
@@ -169,6 +171,14 @@ class AuthorizeRequest extends AbstractRequest
 
     protected function getEndpoint()
     {
-        return parent::getEndpoint() . '/payments';
+        if ($this->getIntegrationType() === Gateway::TYPE_SERVER_TO_SERVER) {
+            return parent::getEndpoint() . '/payments';
+        }
+
+        if ($this->getIntegrationType() === Gateway::TYPE_COPY_AND_PASTE) {
+            return parent::getEndpoint() . '/checkouts';
+        }
+
+        throw new \LogicException("Unknown integrationType {$this->getIntegrationType()}");
     }
 }
