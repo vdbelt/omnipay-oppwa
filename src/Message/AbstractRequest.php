@@ -6,9 +6,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
     const API_VERSION = 'v1';
 
-    protected $testEndpoint = 'https://test.oppwa.com';
+    protected $testEndpoint = 'https://eu-test.oppwa.com';
 
-    protected $liveEndpoint = 'https://oppwa.com';
+    protected $liveEndpoint = 'https://eu-prod.oppwa.com';
 
     public function getIntegrationType()
     {
