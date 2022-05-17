@@ -2,6 +2,7 @@
 
 namespace Omnipay\Oppwa\Message;
 
+use Omnipay\Oppwa\Gateway;
 use Omnipay\Tests\TestCase;
 
 class PurchaseRequestTest extends TestCase
@@ -12,7 +13,8 @@ class PurchaseRequestTest extends TestCase
         $this->request->initialize(
             array(
                 'amount' => '10.00',
-                'currency' => 'USD'
+                'currency' => 'USD',
+                'integrationType' => Gateway::TYPE_SERVER_TO_SERVER,
             )
         );
     }
